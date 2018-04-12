@@ -175,8 +175,8 @@ function showdaterange(vid){
                     $resValue[$key]['Partner_Name'] = $value->MAIN_AGEN_NAME;
                     $resValue[$key]['Play_Point']    = $value->TOT_BET;
                     $resValue[$key]['Win_Point']     = $value->TOT_WIN;
-                    $resValue[$key]['Agent']         = !empty($value->MARGIN) ? $value->MARGIN : 0;
-                    $resValue[$key]['Company']       = !empty($value->NET) ? $value->NET : 0;
+                    $resValue[$key]['Agent']         = !empty($value->MARGIN) ? $value->MARGIN : '0.00';
+                    $resValue[$key]['Company']       = !empty($value->NET) ? $value->NET : '0.00';
                 }
             }
         ?>
@@ -225,10 +225,10 @@ function showdaterange(vid){
                       rowNum:500,
                       width: 999, height: "100%",
                       loadComplete: function () {
-                        var mydata = <?php echo json_encode($resValue); ?>;
-                        for( var i = 0; i <= mydata.length; i++ ){
-                            jQuery("#list2").jqGrid('addRowData',i+1,mydata[i]);
-                        }
+                          var mydata = <?php echo json_encode($resValue); ?>;
+                          for( var i = 0; i <= mydata.length; i++ ){
+                              jQuery("#list2").jqGrid('addRowData',i+1,mydata[i]);
+                          }
 
                           var playpointsSum = jQuery("#list2").jqGrid('getCol', 'Play_Point', false, 'sum').toFixed(2);
                           var winpointsSum = jQuery("#list2").jqGrid('getCol', 'Win_Point', false, 'sum').toFixed(2);
@@ -238,7 +238,6 @@ function showdaterange(vid){
                       }
                   });
                   
-
               </script>
               <div class="page-wrap">
                 <div class="pagination">
