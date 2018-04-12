@@ -17,8 +17,7 @@ class Draw extends CI_Controller{
 		//$partnerTypeId=$this->session->userdata['partnertypeid'];
 		//echo '<pre>';print_r($this->session->userdata);exit;
 		$partner_id=$this->session->userdata['partnerid'];
-		
-		if($partner_id != 1 || $partner_id == 68 || $partner_id == 69){
+		if($partner_id == 3 || $partner_id == 4){
 			redirect('login');
 		} 
 				
