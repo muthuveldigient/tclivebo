@@ -1,5 +1,0 @@
-<?php
-
-$sRealPath = realpath( './' ) ;
-	echo $sRealPath;
-?>
