@@ -7,28 +7,28 @@ hs.outlineType = 'rounded-white';
 hs.wrapperClassName = 'draggable-header';
 
 function confirmDelete(){
-var agree=confirm("Are you sure you want to delete this file?");
-if(agree)
-    return true;
-else
-     return false;
+    var agree=confirm("Are you sure you want to delete this file?");
+    if(agree)
+        return true;
+    else
+        return false;
 }
 
 function activateUser(status,userid,positionid){
-   xmlHttp3=GetXmlHttpObject()
-   
-   if(status == 1){
+    xmlHttp3=GetXmlHttpObject()
+
+    if(status == 1){
      var urlstatus = 'deactive';
-   }else{
+    }else{
      var urlstatus = 'active';
-   }
-   var url='<?php echo base_url()."user/ajax/"?>'+urlstatus+'/'+userid;    
- 
-   //url=url+"?disid="+disid;
-   xmlHttp3.onreadystatechange=Showsubagent(userid,status,positionid)
-   xmlHttp3.open("GET",url,true);
-   xmlHttp3.send(null);
-   return false;
+    }
+    var url='<?php echo base_url()."user/ajax/"?>'+urlstatus+'/'+userid;    
+
+    //url=url+"?disid="+disid;
+    xmlHttp3.onreadystatechange=Showsubagent(userid,status,positionid)
+    xmlHttp3.open("GET",url,true);
+    xmlHttp3.send(null);
+    return false;
 }
 
 </script>
@@ -167,7 +167,6 @@ function showdaterange(vid){
         </form>
       
         <?php 
-
             $resValue = array();
             if ( !empty( $results ) ) {
                 foreach ($results as $key => $value) {
@@ -180,18 +179,6 @@ function showdaterange(vid){
                 }
             }
         ?>
-
-        <style>        
-            .searchWrap1 {
-                background-color: #F8F8F8;
-                border: 1px solid #EEEEEE;
-                border-radius: 5px;
-                float: left;
-                width: 100%;
-                margin-top:10px;
-                font-size:13px;
-            }
-        </style>
       
         <div class="tableListWrap">
           <div class="data-list">
