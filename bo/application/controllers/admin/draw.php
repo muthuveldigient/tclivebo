@@ -744,6 +744,10 @@ class Draw extends CI_Controller {
         }
     }
 
+    public function streaming_settings() {
+		$this->load->view("admin/result/streaming_settings");
+	}
+
 }
 
 ?>

@@ -14,15 +14,15 @@
 
                 if (posid == 1) {
                     var collap = '<?php echo base_url() . '/static/images/user-home.png'; ?>';
-                    var expan = '<?php echo base_url() . '/static/images/user-home.png'; ?>';
+                    var expan  = '<?php echo base_url() . '/static/images/user-home.png'; ?>';
                 } else {
                     var collap = '<?php echo base_url() . '/static/images/collapse.gif'; ?>';
-                    var expan = '<?php echo base_url() . '/static/images/expand.gif'; ?>';
+                    var expan  = '<?php echo base_url() . '/static/images/expand.gif'; ?>';
                 }
                 if (exclass == 'menuitem submenuheader expanded') {
-                    $("#imgpos" + posid).html('<img src="' + collap + '" width="11" height="11" align="left" style="padding:2px 5px 0 0" >');
-                } else {
                     $("#imgpos" + posid).html('<img src="' + expan + '" width="11" height="11" align="left" style="padding:2px 5px 0 0" >');
+                } else {
+                    $("#imgpos" + posid).html('<img src="' + collap + '" width="11" height="11" align="left" style="padding:2px 5px 0 0" >');
                 }
             });
         }, 250);
@@ -100,57 +100,82 @@
                             <img src="<?php echo base_url(); ?>static/images/expand.gif" width="11" height="11" align="left" style="padding:2px 5px 0 0">
                         </div>
                         Reports        </a>
-                    <ul id="-1" style="display: none;">
-
-                    </ul>
-                    <ul id="0" style="display: none;">
-
-                        <div class="SubMenuCnt"><li><a href="<?php echo base_url(); ?>reports/agent_turnover/report?rid=62">Turn Over </a></li></div>      
-                    </ul>
-
-                </li></ul>
-        </div>
-<?php } else { //admin ?>
-        <div class="glossymenu">
-            <ul id="menu1" class="example_menu1">
-
-                <li>
-                    <a class="menuitem submenuheader collapsed" href=" #" id="4" title="Reports ">
-                        <div id="imgpos4">
-                            <img src="<?php echo base_url(); ?>static/images/expand.gif" width="11" height="11" align="left" style="padding:2px 5px 0 0">
-                        </div>
-                        Reports        </a>
-                    <ul id="-1" style="display: none;">
-
-                    </ul>
-                    <ul id="0" style="display: none;">
-
-                        <div class="SubMenuCnt"><li><a href="<?php echo base_url(); ?>reports/agent_turnover/report?rid=62">Turn Over </a></li></div>      
-                    </ul>
-
-                </li></ul>
-        </div>
-
-        <div class="glossymenu">
-            <ul id="menu1" class="example_menu1">
-
-                <li>
-                    <a class="menuitem submenuheader expanded" href=" #" id="5" title="Ticket System ">
-                        <div id="imgpos5"><img src="<?php echo base_url(); ?>static/images/collapse.gif" width="11" height="11" align="left" style="padding:2px 5px 0 0"></div>
-                        Ticket System        </a>
                     <ul id="-1" style="display: block;">
 
                     </ul>
                     <ul id="0" style="display: block;">
 
-                        <div class="SubMenuCnt"><li><a href="<?php echo base_url(); ?>admin/draw/creation">Create Draw </a></li></div>      
-                    </ul>
-                    <ul id="1" style="display: block;">
-
-                        <div class="SubMenuCnt"><li><a href="<?php echo base_url(); ?>admin/draw/drawresult">Result </a></li></div>      
+                        <div class="SubMenuCnt"><li><a href="<?php echo base_url(); ?>reports/agent_turnover/report?rid=62">Turn Over </a></li></div>      
                     </ul>
 
                 </li></ul>
+        </div>
+<?php } else { //admin 
+
+    $segment   = $this->uri->segment(1);
+    $segment_2 = $this->uri->segment(2);
+
+    if($segment == 'reports') {
+        $reports_icon     = 'collapsed';
+        $reports_img      = 'collapse';
+        $reports_sub_menu = 'style="display:block"';
+
+        $draw_icon     = 'expanded';
+        $draw_img      = 'expand';
+        $draw_sub_menu = 'style="display:none"';
+    } else if($segment_2 == 'draw') {
+        $draw_icon     = 'collapsed';
+        $draw_img      = 'collapse';
+        $draw_sub_menu = 'style="display:block"';
+
+        $reports_icon     = 'expanded';
+        $reports_img      = 'expand';
+        $reports_sub_menu = 'style="display:none"';
+    } 
+?>
+        <div class="glossymenu">
+            <ul id="menu1" class="example_menu1">
+                <li>
+                    <a class="menuitem submenuheader <?php echo $reports_icon; ?>" href=" #" id="4" title="Reports ">
+                        <div id="imgpos4">
+                            <img src="<?php echo base_url(); ?>static/images/<?php echo $reports_img; ?>.gif" width="11" height="11" align="left" style="padding:2px 5px 0 0">
+                        </div>
+                        Reports</a>
+                    <ul id="-1" <?php echo $reports_sub_menu; ?>>
+
+                    </ul>
+                    <ul id="0" <?php echo $reports_sub_menu; ?>>
+
+                        <div class="SubMenuCnt"><li><a href="<?php echo base_url(); ?>reports/agent_turnover/report?rid=62">Turn Over </a></li></div>      
+                    </ul>
+
+                </li>
+            </ul>
+        </div>
+
+        <div class="glossymenu">
+            <ul id="menu1" class="example_menu1">
+
+                <li>
+                    <a class="menuitem submenuheader <?php echo $draw_icon; ?>" href=" #" id="5" title="Ticket System ">
+                        <div id="imgpos5"><img src="<?php echo base_url(); ?>static/images/<?php echo $draw_img; ?>.gif" width="11" height="11" align="left" style="padding:2px 5px 0 0"></div>
+                        Ticket System </a>
+
+                    <ul id="-1" <?php echo $draw_sub_menu; ?>>
+
+                    </ul>
+                    <ul id="0" <?php echo $draw_sub_menu; ?>>
+                        <div class="SubMenuCnt"><li><a href="<?php echo base_url(); ?>admin/draw/creation">Create Draw</a></li></div>      
+                    </ul>
+                    <ul id="1" <?php echo $draw_sub_menu; ?>>
+                        <div class="SubMenuCnt"><li><a href="<?php echo base_url(); ?>admin/draw/drawresult">Result</a></li></div>      
+                    </ul>
+                    <ul id="1" <?php echo $draw_sub_menu; ?>>
+                        <div class="SubMenuCnt"><li><a href="<?php echo base_url(); ?>admin/draw/streaming_settings">Settings</a></li></div>      
+                    </ul>
+
+                </li>
+            </ul>
         </div>
     <?php }
     ?>
