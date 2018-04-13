@@ -170,9 +170,9 @@
                     <ul id="1" <?php echo $draw_sub_menu; ?>>
                         <div class="SubMenuCnt"><li><a href="<?php echo base_url(); ?>admin/draw/drawresult">Result</a></li></div>      
                     </ul>
-                    <ul id="1" <?php echo $draw_sub_menu; ?>>
+                    <!-- <ul id="1" <?php echo $draw_sub_menu; ?>>
                         <div class="SubMenuCnt"><li><a href="<?php echo base_url(); ?>admin/draw/streaming_settings">Settings</a></li></div>      
-                    </ul>
+                    </ul> -->
 
                 </li>
             </ul>
