@@ -202,10 +202,10 @@ function showdaterange(vid){
                       colNames:['Partner Name', 'Play Point', 'Win Point', 'Agent', 'Company'],
                       colModel:[
                           {name:'Partner_Name',index:'Partner_Name',align:"left", width:140,sortable:true},
-                          {name:'Play_Point',index:'Play_Point',align:"left", width:90,sortable:true},
-                          {name:'Win_Point',index:'Win_Point',align:"left", width:90,sortable:true},
-                          {name:'Agent',index:'Agent',align:"left", width:90,sortable:true},
-                          {name:'Company',index:'Company',align:"left", width:90,sortable:true}
+                          {name:'Play_Point',index:'Play_Point',align:"right", width:90,sortable:true},
+                          {name:'Win_Point',index:'Win_Point',align:"right", width:90,sortable:true},
+                          {name:'Agent',index:'Agent',align:"right", width:90,sortable:true},
+                          {name:'Company',index:'Company',align:"right", width:90,sortable:true}
                       ],
                       footerrow: true,
                       userDataOnFooter: true,
