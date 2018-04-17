@@ -78,7 +78,7 @@
                 <li>
                     <a class="menuitem submenuheader expanded" href=" #" id="5" title="Ticket System ">
                         <div id="imgpos5"><img src="<?php echo base_url(); ?>static/images/collapse.gif" width="11" height="11" align="left" style="padding:2px 5px 0 0"></div>
-                        Ticket System        </a>
+                    Ticket System</a>
                     <ul id="-1" style="display: block;">
 
                     </ul>
@@ -99,7 +99,7 @@
                         <div id="imgpos4">
                             <img src="<?php echo base_url(); ?>static/images/expand.gif" width="11" height="11" align="left" style="padding:2px 5px 0 0">
                         </div>
-                        Reports        </a>
+                    Reports</a>
                     <ul id="-1" style="display: block;">
 
                     </ul>
@@ -140,7 +140,7 @@
                         <div id="imgpos4">
                             <img src="<?php echo base_url(); ?>static/images/<?php echo $reports_img; ?>.gif" width="11" height="11" align="left" style="padding:2px 5px 0 0">
                         </div>
-                        Reports</a>
+                    Reports</a>
                     <ul id="-1" <?php echo $reports_sub_menu; ?>>
 
                     </ul>
@@ -159,7 +159,7 @@
                 <li>
                     <a class="menuitem submenuheader <?php echo $draw_icon; ?>" href=" #" id="5" title="Ticket System ">
                         <div id="imgpos5"><img src="<?php echo base_url(); ?>static/images/<?php echo $draw_img; ?>.gif" width="11" height="11" align="left" style="padding:2px 5px 0 0"></div>
-                        Ticket System </a>
+                    Ticket System</a>
 
                     <ul id="-1" <?php echo $draw_sub_menu; ?>>
 
@@ -170,9 +170,9 @@
                     <ul id="1" <?php echo $draw_sub_menu; ?>>
                         <div class="SubMenuCnt"><li><a href="<?php echo base_url(); ?>admin/draw/drawresult">Result</a></li></div>      
                     </ul>
-                    <ul id="1" <?php echo $draw_sub_menu; ?>>
+                    <!-- <ul id="1" <?php echo $draw_sub_menu; ?>>
                         <div class="SubMenuCnt"><li><a href="<?php echo base_url(); ?>admin/draw/streaming_settings">Settings</a></li></div>      
-                    </ul>
+                    </ul> -->
 
                 </li>
             </ul>

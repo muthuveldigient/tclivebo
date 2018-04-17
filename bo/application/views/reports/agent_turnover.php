@@ -7,28 +7,28 @@ hs.outlineType = 'rounded-white';
 hs.wrapperClassName = 'draggable-header';
 
 function confirmDelete(){
-var agree=confirm("Are you sure you want to delete this file?");
-if(agree)
-    return true;
-else
-     return false;
+    var agree=confirm("Are you sure you want to delete this file?");
+    if(agree)
+        return true;
+    else
+        return false;
 }
 
 function activateUser(status,userid,positionid){
-   xmlHttp3=GetXmlHttpObject()
-   
-   if(status == 1){
+    xmlHttp3=GetXmlHttpObject()
+
+    if(status == 1){
      var urlstatus = 'deactive';
-   }else{
+    }else{
      var urlstatus = 'active';
-   }
-   var url='<?php echo base_url()."user/ajax/"?>'+urlstatus+'/'+userid;    
- 
-   //url=url+"?disid="+disid;
-   xmlHttp3.onreadystatechange=Showsubagent(userid,status,positionid)
-   xmlHttp3.open("GET",url,true);
-   xmlHttp3.send(null);
-   return false;
+    }
+    var url='<?php echo base_url()."user/ajax/"?>'+urlstatus+'/'+userid;    
+
+    //url=url+"?disid="+disid;
+    xmlHttp3.onreadystatechange=Showsubagent(userid,status,positionid)
+    xmlHttp3.open("GET",url,true);
+    xmlHttp3.send(null);
+    return false;
 }
 
 </script>
@@ -112,7 +112,7 @@ function showdaterange(vid){
           </tr>
         </table>
         
-        <form action="<?php echo base_url(); ?>reports/agent_turnover/report?rid=<?php echo $rid;?>" method="post" name="tsearchform" id="tsearchform" onsubmit="return chkdatevalue();">
+        <form action="<?php echo base_url(); ?>reports/agent_turnover/report?rid=<?php echo $rid;?>" method="post" name="tsearchform" id="tsearchform">
           <table width="100%" cellpadding="0" cellspacing="0" bgcolor="#993366" class="searchWrap">
           <tr>
             <td><table width="100%" cellpadding="10" cellspacing="10">
@@ -167,31 +167,18 @@ function showdaterange(vid){
         </form>
       
         <?php 
-
             $resValue = array();
             if ( !empty( $results ) ) {
                 foreach ($results as $key => $value) {
                     // $resValue[$key]['MAIN_AGEN_ID']   = $value->MAIN_AGEN_ID;     
-                    $resValue[$key]['Partner_Namer'] = $value->MAIN_AGEN_NAME;
+                    $resValue[$key]['Partner_Name'] = $value->MAIN_AGEN_NAME;
                     $resValue[$key]['Play_Point']    = $value->TOT_BET;
                     $resValue[$key]['Win_Point']     = $value->TOT_WIN;
-                    $resValue[$key]['Agent']         = !empty($value->MARGIN) ? $value->MARGIN : 0;
-                    $resValue[$key]['Company']       = !empty($value->NET) ? $value->NET : 0;
+                    $resValue[$key]['Agent']         = !empty($value->MARGIN) ? $value->MARGIN : '0.00';
+                    $resValue[$key]['Company']       = !empty($value->NET) ? $value->NET : '0.00';
                 }
             }
         ?>
-
-        <style>        
-            .searchWrap1 {
-                background-color: #F8F8F8;
-                border: 1px solid #EEEEEE;
-                border-radius: 5px;
-                float: left;
-                width: 100%;
-                margin-top:10px;
-                font-size:13px;
-            }
-        </style>
       
         <div class="tableListWrap">
           <div class="data-list">
@@ -212,21 +199,32 @@ function showdaterange(vid){
 
                   jQuery("#list2").jqGrid({
                       datatype: "local",
-                      colNames:['Partner Namer', 'Play Point', 'Win Point', 'Agent', 'Company'],
+                      colNames:['Partner Name', 'Play Point', 'Win Point', 'Agent', 'Company'],
                       colModel:[
-                        {name:'Partner_Namer',index:'Partner_Namer',align:"left", width:140,sortable:true},
-                        {name:'Play_Point',index:'Play_Point',align:"left", width:90,sortable:true},
-                        {name:'Win_Point',index:'Win_Point',align:"left", width:90,sortable:true},
-                        {name:'Agent',index:'Agent',align:"left", width:90,sortable:true},
-                        {name:'Company',index:'Company',align:"left", width:90,sortable:true}
+                          {name:'Partner_Name',index:'Partner_Name',align:"left", width:140,sortable:true},
+                          {name:'Play_Point',index:'Play_Point',align:"right", width:90,sortable:true},
+                          {name:'Win_Point',index:'Win_Point',align:"right", width:90,sortable:true},
+                          {name:'Agent',index:'Agent',align:"right", width:90,sortable:true},
+                          {name:'Company',index:'Company',align:"right", width:90,sortable:true}
                       ],
+                      footerrow: true,
+                      userDataOnFooter: true,
                       rowNum:500,
-                      width: 999, height: "100%"
-                  });
-                  var mydata = <?php echo json_encode($resValue); ?>;
-                  for( var i = 0; i <= mydata.length; i++ )
-                      jQuery("#list2").jqGrid('addRowData',i+1,mydata[i]);
+                      width: 999, height: "100%",
+                      loadComplete: function () {
+                          var mydata = <?php echo json_encode($resValue); ?>;
+                          for( var i = 0; i <= mydata.length; i++ ){
+                              jQuery("#list2").jqGrid('addRowData',i+1,mydata[i]);
+                          }
 
+                          var playpointsSum = jQuery("#list2").jqGrid('getCol', 'Play_Point', false, 'sum').toFixed(2);
+                          var winpointsSum = jQuery("#list2").jqGrid('getCol', 'Win_Point', false, 'sum').toFixed(2);
+                          var margin = jQuery("#list2").jqGrid('getCol', 'Agent', false, 'sum').toFixed(2);
+                          var net = jQuery("#list2").jqGrid('getCol', 'Company', false, 'sum').toFixed(2);
+                          jQuery("#list2").jqGrid('footerData','set', {Partner_Name: 'Total:', Play_Point: playpointsSum,Win_Point:winpointsSum, Agent:margin, Company:net});  
+                      }
+                  });
+                  
               </script>
               <div class="page-wrap">
                 <div class="pagination">
