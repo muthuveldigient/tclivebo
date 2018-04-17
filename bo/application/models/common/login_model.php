@@ -14,19 +14,7 @@ class Login_model extends CI_Model
         $this->db2->where('ACCOUNT_STATUS', 1);
 		// $this->db2->where('ONLINE_AGENT_STATUS', 1);
        	$query = $this->db2->get('admin_user');
-		/*
-       	if($query->num_rows == 1) {			
-			$chkAccessIDs=$this->getDomainBasedPartnerIDs();
-			$result      = $query->row();
-			if($result->FK_PARTNER_ID!=ADMIN_ID) {		
-				if(in_array($result->FK_PARTNER_ID,$chkAccessIDs)) {
-					$valid=1;
-				} else {
-					return false;
-				}
-			}
-		}		
-		*/
+		
 		$arrTraking["DATE_TIME"] = date('Y-m-d h:i:s');
 		$arrTraking["USERNAME"]     =$username;
 		$arrTraking["ACTION_NAME"]  ="Login";
