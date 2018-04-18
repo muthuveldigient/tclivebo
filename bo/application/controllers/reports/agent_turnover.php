@@ -50,6 +50,66 @@ class Agent_turnover extends CI_Controller{
 
  		$this->load->view('reports/agent_turnover', $data);
 	}
+
+	public function exportToExcel() {
+		error_reporting(E_ALL);
+		ini_set('display_errors', TRUE);
+		ini_set('display_startup_errors', TRUE);
+		ini_set('memory_limit', '-1');
+		// ini_set('memory_limit', '3500M');
+
+		// echo __LINE__; exit;
+        //load our new PHPExcel library
+        $this->load->library('phpexcel/PHPExcel');
+
+        //activate worksheet number 1
+        $this->phpexcel->setActiveSheetIndex(0);
+
+        //name the worksheet
+        $this->phpexcel->getActiveSheet()->setTitle('Cards list');
+ 
+        $result = $this->agentreport_model->andarbahar_random_cards_export();
+		// echo '<pre>'; print_r($result); exit;
+        $resExport = array( '0' => array(
+			'GAME_ID'			=> '',
+            'PLAY_GROUP_ID' 	=> 'PLAY_GROUP_ID',
+            'ANDARBAHAR_DATA' 	=> 'ANDARBAHAR_DATA',
+            'STARTED' 			=> 'STARTED',
+		));
+
+		// if( !empty( $result ) ) {
+
+		// 	foreach( $result as $index => $list ) {
+		// 		$indexes = $index + 1; 		
+		// 		$resExport[$indexes]['GAME_ID'] 	    = $list->GAME_ID;
+		// 		$resExport[$indexes]['PLAY_GROUP_ID'] 	= $list->PLAY_GROUP_ID;
+		// 		$resExport[$indexes]['ANDARBAHAR_DATA'] = $list->SLOT_NUMBER_DATA;
+		// 		$resExport[$indexes]['STARTED'] 		= $list->STARTED;
+		// 	}
+		// }
+ 
+        // read data to active sheet
+        // $this->phpexcel->getActiveSheet()->fromArray($resExport);
+        $this->phpexcel->getActiveSheet()->fromArray($result);
+ 
+        $filename = 'excel_list_'.date('Y-m-d H:i:s').'.xls'; //save our workbook as this file name
+ 
+        header('Content-Type: application/vnd.ms-excel'); //mime type
+ 
+        header('Content-Disposition: attachment;filename="'.$filename.'"'); //tell browser what's the file name
+ 
+        header('Cache-Control: max-age=0'); //no cache
+                    
+        //save it to Excel5 format (excel 2003 .XLS file), change this to 'Excel2007' ( and adjust the filename extension, also the header mime type )
+        //if you want to save it as.XLSX Excel 2007 format
+ 
+        $objWriter = PHPExcel_IOFactory::createWriter($this->phpexcel, 'Excel5'); 
+ 		ob_end_clean();
+
+        //force user to download the Excel file without writing it to server's HD
+        $objWriter->save('php://output');
+        exit;
+	}
 			
 }
 

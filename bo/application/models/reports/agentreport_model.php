@@ -13,7 +13,7 @@ class agentreport_Model extends CI_Model
 	public function getTurnoverReport( $data ) {
 
 		$this->db->select('MAIN_AGEN_ID, MAIN_AGEN_NAME, SUM(PLAY_POINTS) AS TOT_BET, SUM(WIN_POINTS) AS TOT_WIN, SUM(MARGIN) AS MARGIN, SUM(NET) AS NET');
-
+		$this->db->where('GAME_ID', 'wintc_lotto');
 		if( !empty($data["START_DATE_TIME"]) && !empty($data["END_DATE_TIME"]) ) {
 			$start = date("Y-m-d 00:00:00", strtotime($data["START_DATE_TIME"]));
 			$end   = date("Y-m-d 23:59:59", strtotime($data["END_DATE_TIME"]));
@@ -28,6 +28,10 @@ class agentreport_Model extends CI_Model
 
 		$this->db->group_by("MAIN_AGEN_ID");
 		return $this->db->get('ymainagent_game_turn_over_history')->result();
+	}
+
+	public function andarbahar_random_cards_export() {
+		return $this->db->get('roulette_random_numbers')->result_array();
 	}
 
 }
